@@ -73,7 +73,6 @@ def get_news(stock:str)->pd.DataFrame:
     content_df = pd.json_normalize(news_df['content'])
     content_df['stock'] = stock
     content_df = content_df.rename(columns={'stock': 'stock', 'id': 'uuid', 'title': 'title', 'provider.displayName': 'publisher', 'previewUrl': 'link','contentType': 'type'})
-    content_df = content_df[['uuid', 'stock', 'title', 'publisher', 'link', 'type']]
-    content_df
-    return news
+    content_df = content_df[['stock','uuid', 'title', 'publisher', 'link', 'type']]
+    return content_df
 
