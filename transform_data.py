@@ -11,7 +11,7 @@ def normalize_stock_data(stock_history:pd.DataFrame)->pd.DataFrame:
         pd.DataFrame: Normalized DataFrame
     """
     # Normalize the data
-    df_normalized = stock_history['Open','High','Low','Close'].round(2)
-    df_normalized = df_normalized.rename(columns={'Date': 'Trade_Date'})
+    stock_history[['Open', 'High', 'Low', 'Close']] = stock_history[['Open','High','Low','Close']].round(2)
+    stock_history = stock_history.rename(columns={'Date': 'Trade_Date'})
     
-    return df_normalized
+    return stock_history
