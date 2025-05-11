@@ -51,8 +51,12 @@ def standardize_price_to_usd(stock_history:pd.DataFrame)->pd.DataFrame:
     # Get currency code for the stock
     stock_history['currency_code'] = cur
 
-    fx_rates = ed.get_exchange_rate(cur, 'USD', 'ytd', '1d')
-    stock_history['usd_close'] = stock_history['Close'] * fx_rates['Close']
+    if cur == 'USD':
+        stock_history['usd_close'] = stock_history['Close']
+    else:
+        # Get exchange rate for the stock
+        fx_rates = ed.get_exchange_rate(cur, 'USD', 'ytd', '1d')
+        stock_history['usd_close'] = stock_history['Close'] * fx_rates['Close']
 
     
     return stock_history
@@ -87,4 +91,22 @@ def get_top_bottom_days(stock_history:pd.DataFrame, top:int = 5, bottom:int = 5)
     bottom_days = stock_history.nsmallest(bottom, 'Close')
     
     return pd.concat([top_days, bottom_days])
+
+def group_by_sector(stock_history:pd.DataFrame)->pd.DataFrame:
+    """Group the stock history by sector.
+
+    Args:
+        stock_history (pd.DataFrame): DataFrame with stock history
+        sector (str): Sector to group by
+
+    Returns:
+        pd.DataFrame: DataFrame with grouped stock history
+    """
+    # Group by sector
+    grouped = stock_history.groupby('sector').agg(
+        avg_close=('Close', 'mean'),
+        avg_volume=('Volume', 'mean'),
+    ).reset_index()
+    
+    return grouped
 
