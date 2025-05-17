@@ -1,6 +1,5 @@
 import pandas as pd
 import numpy as np
-import extract_data as ed
 
 def normalize_stock_data(stock_history:pd.DataFrame)->pd.DataFrame:
     """Normalize the data in the DataFrame.
@@ -109,4 +108,5 @@ def group_by_sector(stock_history:pd.DataFrame)->pd.DataFrame:
     ).reset_index()
     
     return grouped
+
 
