@@ -37,17 +37,17 @@ def save_df_to_db(
     )
 
 
-# data = {
-#     "Date": ["2025-01-01", "2025-01-02", "2025-01-03"],
-#     "Open": [150.0, 152.5, 155.0],
-#     "High": [155.0, 157.5, 160.0],
-#     "Low": [148.0, 150.5, 153.0],
-#     "Close": [154.0, 156.5, 159.0],
-#     "Volume": [1000000, 1200000, 1100000],
-#     "Dividends": [0.0, 0.0, 0.0],
-#     "Stock Splits": [0, 0, 0],
-# }
-# df = pd.DataFrame(data)
-
-# save_df_to_db(df, "test_table")
+data = {
+    "Date": ["2025-01-01", "2025-01-02", "2025-01-03"],
+    "Open": [150.0, 152.5, 155.0],
+    "High": [155.0, 157.5, 160.0],
+    "Low": [148.0, 150.5, 153.0],
+    "Close": [154.0, 156.5, 159.0],
+    "Volume": [1000000, 1200000, 1100000],
+    "Dividends": [0.0, 0.0, 0.0],
+    "Stock Splits": [0, 0, 0],
+}
+df = pd.DataFrame(data)
+# Convert the 'Date' column to datetime format
+save_df_to_db(df, "test_table")
 

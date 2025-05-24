@@ -103,3 +103,5 @@ def get_news(stock: str) -> pd.DataFrame:
     )
     content_df = content_df[["stock", "uuid", "title", "publisher", "link", "type"]]
     return content_df
+
+get_stock_history('META','ytd','1d')
