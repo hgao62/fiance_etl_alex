@@ -30,7 +30,7 @@ def add_stock_returns(stock_history:pd.DataFrame)->pd.DataFrame:
         pd.DataFrame: DataFrame with stock returns
     """
     # Calculate daily return
-    stock_history['daily_return'] = stock_history['Close'].pct_change(by='Date')
+    stock_history['daily_return'] = stock_history['Close'].pct_change()
     
     # Calculate cumulative return
     stock_history['cumulative_return'] = (1 + stock_history['daily_return']).cumprod() - 1
