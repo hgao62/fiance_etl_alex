@@ -16,7 +16,7 @@ ENGINE = create_engine(
     pool_recycle=1800,       # Recycle after 30 minutes
     pool_pre_ping=True       # Ping before using (avoids broken pipe)
 )
-def create_table_if_not_exists(df: pd.DataFrame, table_name: str, engine=MYSQL_POOL_ENGINE):
+def create_table_if_not_exists(df: pd.DataFrame, table_name: str, engine=ENGINE):
     dtype_map = {
         "int64": "INT",
         "float64": "FLOAT",
@@ -37,7 +37,7 @@ def create_table_if_not_exists(df: pd.DataFrame, table_name: str, engine=MYSQL_P
         print(f"✅ Ensured table `{table_name}` exists.")
 
 
-def save_df_to_db(df: pd.DataFrame, table_name: str, engine=MYSQL_POOL_ENGINE, replace=False):
+def save_df_to_db(df: pd.DataFrame, table_name: str, engine=ENGINE, replace=False):
     if df.empty:
         print(f"⚠️ DataFrame is empty, skipping insert to {table_name}")
         return
