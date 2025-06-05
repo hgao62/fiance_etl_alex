@@ -9,3 +9,4 @@ tiingo==0.14.0
 pylint==2.17.7
 black==23.3.0
 isort==5.9.3
+pymysql==1.1.0
