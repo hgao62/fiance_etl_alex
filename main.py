@@ -2,6 +2,17 @@ from extract_data import get_stock_history, get_news, get_stock_currency_code
 from transform_data import add_stock_returns, normalize_stock_data, standardize_price_to_usd,calculate_moving_average
 import load_data
 import pandas as pd
+import logging
+
+logging.basicConfig(
+    filemode='a',
+    format='%(asctime)s - %(message)s',
+    filename='app.log', 
+    level=logging.INFO
+    )
+
+logger = logging.getLogger(__name__)
+
 
 def run_pipeline(
     tickers: list[str],
@@ -16,23 +27,34 @@ def run_pipeline(
         Returns:
         '''
         # Extract stock history
+        logger.info(f"Extracting stock history for {ticker} with period {period} and interval {interval}")
         stock_history = get_stock_history(ticker, period, interval)
+        if stock_history.empty:
+            logger.warning(f"No stock history found for {ticker}. Skipping...")
+            continue
+        # Extract news
+        logger.info(f"Extracting news for {ticker}")
         news = get_news(ticker)
         
         # Transform stock history
+        logger.info("adding stock returns")
         stock_history = add_stock_returns(stock_history)
+        logger.info("standardizing stock prices to USD")
         stock_history = standardize_price_to_usd(stock_history)
+        logger.info("normalizing stock data")
         stock_history = normalize_stock_data(stock_history)
+        logger.info("calculating moving average")
         stock_history = calculate_moving_average(stock_history, window=5)
 
         # Load to database
-        load_data.save_df_to_db(stock_history, table_name="stock_history")
-        load_data.save_df_to_db(news, table_name="news")
+        # load_data.save_df_to_db(stock_history, table_name="stock_history")
+        # load_data.save_df_to_db(news, table_name="news")
 
 
 if __name__ == '__main__':
     tickers = ['AAPL', 'SHOP.TO', 'MSFT', 'AMZN', 'TSLA']
     run_pipeline(tickers)
+    print("ETL pipeline completed successfully.")
 
 
 
