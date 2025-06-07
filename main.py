@@ -54,6 +54,7 @@ def run_pipeline(
 if __name__ == '__main__':
     tickers = ['AAPL', 'SHOP.TO', 'MSFT', 'AMZN', 'TSLA']
     run_pipeline(tickers)
+    print("ETL pipeline completed successfully.")
 
 
 

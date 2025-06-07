@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 import pandas as pd
 
 user_name = "root"  # database username
@@ -62,10 +62,10 @@ def save_df_to_db(df: pd.DataFrame, table_name: str, engine=ENGINE, replace=Fals
         raw_conn.close()
 
 
-if __name__ == "__main__":
-    df = pd.DataFrame({
-    "id": [1, 2, 3],
-    "name": ["Alice", "Bob", "Charlie"]
-})
+# if __name__ == "__main__":
+#     df = pd.DataFrame({
+#     "id": [1, 2, 3],
+#     "name": ["Alice", "Bob", "Charlie"]
+# })
 
-    save_df_to_db(df, "my_table", replace=True)
+#     save_df_to_db(df, "my_table", replace=True)
