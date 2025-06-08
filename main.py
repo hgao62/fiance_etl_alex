@@ -42,13 +42,13 @@ def run_pipeline(
         logger.info("standardizing stock prices to USD")
         stock_history = standardize_price_to_usd(stock_history)
         logger.info("normalizing stock data")
-        stock_history = normalize_stock_data(stock_history)
-        logger.info("calculating moving average")
         stock_history = calculate_moving_average(stock_history, window=5)
+        logger.info("normalizing stock data")
+        stock_history = normalize_stock_data(stock_history)
 
         # Load to database
-        # load_data.save_df_to_db(stock_history, table_name="stock_history")
-        # load_data.save_df_to_db(news, table_name="news")
+        load_data.save_df_to_db(stock_history, table_name="stock_history",replace=True)
+        load_data.save_df_to_db(news, table_name="news",replace=True)
 
 
 if __name__ == '__main__':

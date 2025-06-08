@@ -1,11 +1,11 @@
 from sqlalchemy import create_engine, text
 import pandas as pd
 
-user_name = "root"  # database username
-password = "8102"   # database password
-host = "localhost"  # database host (e.g., localhost or an IP address)
+user_name = "airflow_user"  # database username
+password = "airflow_pass"   # database password
+host = "mysql"  # database host (e.g., localhost or an IP address)
 port = "3306"       # database port (default for MySQL is 3306)
-db_name = "finance_etl" # database name
+db_name = "airflow_db" # database name
     # Create the database engine
 MYSQL_CONNECTION_STRING = f"mysql+pymysql://{user_name}:{password}@{host}:{port}/{db_name}"
 

@@ -14,6 +14,7 @@ def normalize_stock_data(stock_history:pd.DataFrame)->pd.DataFrame:
     # Normalize the data
     stock_history[['Open', 'High', 'Low', 'Close']] = stock_history[['Open','High','Low','Close']].round(2)
     stock_history = stock_history.rename(columns={'Date': 'Trade_Date'})
+    stock_history.fillna(0, inplace=True)  # Fill NaN values with 0
     
     return stock_history
 
